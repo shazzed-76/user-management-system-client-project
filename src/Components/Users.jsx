@@ -3,10 +3,42 @@ import React, { use } from "react";
 import { FaUser } from "react-icons/fa";
 import { UsersContext } from "../Contexts/UsersProveder";
 import Loading from "./Loading";
+import Swal from "sweetalert2";
 
 const Users = () => {
-  const { users, loading } = use(UsersContext);
+  const { users, loading, setStatus } = use(UsersContext);
   const navigate = useNavigate();
+  console.log(setStatus)
+  const handleDeleteUser = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //delete specific data from database using id
+        fetch(`http://localhost:3000/users/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setStatus(true)
+            if(data.deletedCount){
+              Swal.fire({
+                title: "Deleted!",
+                text: "User data has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+     
+  }
 
   if (loading) {
     return <Loading />;
@@ -53,7 +85,12 @@ const Users = () => {
                   >
                     edit
                   </span>
-                  <span className="btn btn-xs">delete</span>
+                  <span
+                   onClick={() => handleDeleteUser(user?._id)}
+                   className="btn btn-xs"
+                  >
+                    delete
+                  </span>
                 </td>
               </tr>
             ))}

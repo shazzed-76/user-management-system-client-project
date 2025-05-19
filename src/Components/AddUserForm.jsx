@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { use } from 'react';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
+import { UsersContext } from '../Contexts/UsersProveder';
 
 const AddUserForm = () => {
+    const {setStatus} = use(UsersContext);
 
     const handleAddUserForm = (e) => {
         e.preventDefault();
@@ -22,6 +24,7 @@ const AddUserForm = () => {
         .then(res => res.json())
         .then(data => {
             if(data.insertedId){
+                setStatus(true)
                 Swal.fire({
                   position: "center",
                   icon: "success",
