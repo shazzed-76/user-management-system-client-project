@@ -21,7 +21,7 @@ const Users = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         //delete specific data from database using id
-        fetch(`http://localhost:3000/users/${id}`, {
+        fetch(`https://user-management-system-server-ten.vercel.app/users/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

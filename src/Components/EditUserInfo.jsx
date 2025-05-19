@@ -18,7 +18,7 @@ const EditUserInfo = () => {
     console.log(updatedInfo);
 
     // send the updated data in the database
-    fetch(`http://localhost:3000/users/${id}`, {
+    fetch(`https://user-management-system-server-ten.vercel.app/users/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

@@ -14,7 +14,7 @@ const AddUserForm = () => {
         const userData = Object.fromEntries(formData.entries());
         
         //insert the user in to the database
-        fetch("http://localhost:3000/users", {
+        fetch("https://user-management-system-server-ten.vercel.app/users", {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

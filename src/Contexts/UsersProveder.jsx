@@ -10,7 +10,7 @@ const UsersProveder = ({children}) => {
     // console.log(status)
     const fetchUsers = async() => {
         try{
-            const res = await fetch('http://localhost:3000/users');
+            const res = await fetch('https://user-management-system-server-ten.vercel.app/users');
             if(!res.ok){
                 throw new Error(`Failed to fetch ${res.status}`)
             }
