@@ -1,8 +1,12 @@
 import {Link} from 'react-router'
-import React from 'react';
+import React, { use } from 'react';
 import { FaUser } from 'react-icons/fa';
+import { UsersContext } from '../Contexts/UsersProveder';
 
 const Users = () => {
+    const { users } = use(UsersContext)
+
+console.log(users)
     return (
       <div>
         <Link
@@ -25,12 +29,22 @@ const Users = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
-              </tr>
+              {users.map((user, index) => (
+                <tr
+                  className="transition duration-500 hover:bg-gray-200 "
+                  key={user?._id}
+                >
+                  <th>{index + 1}</th>
+                  <td>{user?.userName}</td>
+                  <td>{user?.email}</td>
+                  <td>{user?.gender}</td>
+                  <td>{user?.status}</td>
+                  <td className='space-x-2'>
+                    <span className='btn btn-xs'>edit</span>
+                    <span className='btn btn-xs'>delete</span>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
