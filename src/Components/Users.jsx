@@ -6,9 +6,9 @@ import Loading from "./Loading";
 import Swal from "sweetalert2";
 
 const Users = () => {
-  const { users, loading, setStatus } = use(UsersContext);
+  const { users, loading, setStatus, setSearch } = use(UsersContext);
   const navigate = useNavigate();
-  console.log(setStatus)
+  
   const handleDeleteUser = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -52,6 +52,13 @@ const Users = () => {
       >
         New User <FaUser color="#5205e0" />
       </Link>
+
+      <input
+        type="text"
+        placeholder="Search user by name"
+        className="input block lg:w-md mb-10"
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <div className="overflow-x-auto border border-base-content/5 bg-base-100 h-fit">
         <table className="table">
           {/* head */}
@@ -86,8 +93,8 @@ const Users = () => {
                     edit
                   </span>
                   <span
-                   onClick={() => handleDeleteUser(user?._id)}
-                   className="btn btn-xs"
+                    onClick={() => handleDeleteUser(user?._id)}
+                    className="btn btn-xs"
                   >
                     delete
                   </span>
